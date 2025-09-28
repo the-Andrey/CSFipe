@@ -16,7 +16,7 @@ print
 #### 3 - Os modelos serão exibidos de acordo com a marca selecionada, basta escolher uma:
 print
 
-####4 - Após selecionar todas as opções, basta clicar no botão para acessar o histórico organizado em uma tabela:
+#### 4 - Após selecionar todas as opções, basta clicar no botão para acessar o histórico organizado em uma tabela:
 print
 
 #### 5 - Após a vizualização, você pode baixar o arquivo CSV que conterá a tabela clicando no botão localizado na parte inferior:
