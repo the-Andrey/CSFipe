@@ -21,3 +21,5 @@ print
 
 ### 5 - Após a vizualização, você pode baixar o arquivo CSV que conterá a tabela clicando no botão localizado na parte inferior:
 print
+
+### 6 - O CSV é salvo na pasta de Downloads do dispositivo e pode ser localizado pelo nome 'cars_table'.
