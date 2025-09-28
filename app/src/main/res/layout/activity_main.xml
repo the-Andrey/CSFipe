@@ -16,14 +16,13 @@
         android:backgroundTint="#0000FD"
         tools:context=".MainActivity">
 
-        <TextView
-            android:id="@+id/textViewTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginEnd="40dp"
-            android:text="FipeToCsv"
+        <ImageView
+            android:id="@+id/myImage"
+            android:layout_width="224dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="80dp"
+            android:contentDescription="Logo da aplicação"
+            android:src="@drawable/csfipe"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -33,12 +32,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="80dp"
             android:layout_marginEnd="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/myImage"
+            tools:ignore="MissingConstraints" />
 
         <Spinner
             android:id="@+id/spinnerBrand"
@@ -66,11 +66,11 @@
         <Button
             android:id="@+id/btnDetails2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="40dp"
             android:layout_marginBottom="20dp"
-            android:text="Finalizar"
-            android:backgroundTint="#3C3CE8"
+            android:backgroundTint="#052b7c"
+            android:text="Visualizar"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
