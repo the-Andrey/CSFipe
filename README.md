@@ -8,18 +8,18 @@ Os dados são disponibilidados através da API FIPE ONLINE, que você pode acess
 Para excutar o projeto basta clonar o repositório e abrir o projeto no Android Studio, ao rodar, o aplicativo irá abrir no seu emulador condigurado pelo gerenciador de sistemas ou em seu próprio dispositivo móvel.
 
 #### 1 - Escolher o tipo de veículo:
-print
+<img src="app/src/assets/tipos_veiculos.jpeg" width="300" height="600" />
 
 #### 2 - As marcas serão exibidas de acordo com o tipo de veículo selecionado, basta escolher uma:
-print
+<img src="app/src/assets/marcas_veiculos.jpeg" width="300" height="600" />
 
 #### 3 - Os modelos serão exibidos de acordo com a marca selecionada, basta escolher uma:
-print
+<img src="app/src/assets/modelos_veiculos.jpeg" width="300" height="600" />
 
 #### 4 - Após selecionar todas as opções, basta clicar no botão para acessar o histórico organizado em uma tabela:
-print
+<img src="app/src/assets/historico_veiculo.jpeg" width="300" height="600" />
 
 #### 5 - Após a vizualização, você pode baixar o arquivo CSV que conterá a tabela clicando no botão localizado na parte inferior:
-print
+<img src="app/src/assets/export_botao.jpeg" width="300" height="100" />
 
 #### 6 - O CSV é salvo na pasta de Downloads do dispositivo e pode ser localizado pelo nome 'cars_table'.
