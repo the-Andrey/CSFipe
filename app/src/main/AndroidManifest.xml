@@ -18,6 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fipe_to_csv">
         <activity android:name=".DetailsActivity2" />
+        <activity android:name=".FavoriteActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

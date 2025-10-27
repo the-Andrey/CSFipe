@@ -17,6 +17,7 @@ public class Cars implements Serializable {
     private PriceHistory priceHistory;
     private String referenceMonth;
     private Integer vehicleType;
+    private String vhType;
 
     public Cars(String code, String name, String brand, String codeFipe, String fuel, String fuelAcronym, String model, Integer modelYear, String price, PriceHistory priceHistory, String referenceMonth, Integer vehicleType) {
         this.code = code;
@@ -31,6 +32,12 @@ public class Cars implements Serializable {
         this.priceHistory = priceHistory;
         this.referenceMonth = referenceMonth;
         this.vehicleType = vehicleType;
+    }
+
+    public Cars(String vhType, String brand, String model) {
+        this.vhType = vhType;
+        this.brand = brand;
+        this.model = model;
     }
 
     public String getBrand() {
@@ -55,6 +62,10 @@ public class Cars implements Serializable {
 
     public Integer getModelYear() {
         return modelYear;
+    }
+
+    public String getVhType() {
+        return vhType;
     }
 
     public String getPrice(){

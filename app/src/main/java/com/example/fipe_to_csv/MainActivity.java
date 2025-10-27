@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -38,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
     Spinner spinnerTypeVehicles;
     Spinner spinnerYearsModels;
     Button btnDetails2;
+    Button btnFavorite;
+    Button btnShowFavs;
+    private Preferences prefs;
+
 
 
     List<String> typeVehicles = Arrays.asList(
@@ -53,11 +60,15 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        prefs = new Preferences(this);
+
         spinnerBrands = findViewById(R.id.spinnerBrand);
         spinnerModels = findViewById(R.id.spinnerModels);
         spinnerTypeVehicles = findViewById(R.id.spinnerTypeVehicles);
 
         btnDetails2 = findViewById(R.id.btnDetails2);
+        btnFavorite = findViewById(R.id.btnFavorite);
+        btnShowFavs = findViewById(R.id.btnFavorited);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -81,15 +92,16 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedType = position == 0 ? "cars" : position == 1 ? "motorcycles" : "trucks";
 
+
                 Call<List<Brand>> callMarcas = apiClient.getBrandPerType(selectedType);
-                Log.e("API_DEBUG", "TESTE");
+
                 callMarcas.enqueue(new Callback<List<Brand>>() {
                     @Override
                     public void onResponse(@NonNull Call<List<Brand>> call, @NonNull Response<List<Brand>> response) {
                         if (response.isSuccessful() && response.body() != null){
                             List<Brand> brands = response.body();
 
-                            Log.d("API_JSON_BRAND", new Gson().toJson(brands));
+                            //Log.d("API_JSON_BRAND", new Gson().toJson(brands));
 
                             List<String> brandNames = new ArrayList<>();
 
@@ -103,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
                                     brandNames
                             );
 
+
+
                             // spinner das marcas por tipo de veículo
                             spinnerBrands.setAdapter(adapter);
 
@@ -111,6 +125,9 @@ public class MainActivity extends AppCompatActivity {
                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                     Brand selectedBrand = brands.get(position);
                                     int brandId = Integer.parseInt(selectedBrand.getCode());
+                                    String brandName = selectedBrand.getName();
+
+
 
                                     Call<List<Model>> callModels = apiClient.getModelPerBrand(selectedType, brandId);
 
@@ -120,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                                             if (response.isSuccessful() && response.body()!=null){
                                                 List<Model> models = response.body();
 
-                                                Log.d("API_JSON_MODEL", new Gson().toJson(models));
+                                                //Log.d("API_JSON_MODEL", new Gson().toJson(models));
 
                                                 List<String> modelNames = new ArrayList<>();
 
@@ -142,6 +159,9 @@ public class MainActivity extends AppCompatActivity {
                                                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                                         Model selectedModel = models.get(position);
                                                         int modelId = Integer.parseInt(selectedModel.getCode());
+                                                        String modelName = selectedModel.getName();
+
+
 
                                                         Call<List<Years>> callYears = apiClient.getYearsPerModel(selectedType, brandId, modelId);
 
@@ -152,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
                                                                     List<Years> years = response.body();
 
 
-                                                                    Log.d("API_JSON_YEARS", new Gson().toJson(years));
+                                                                    //Log.d("API_JSON_YEARS", new Gson().toJson(years));
                                                                     List<Cars> carsDetails = new ArrayList<>();
 
                                                                     for(Years year:years){
@@ -185,12 +205,43 @@ public class MainActivity extends AppCompatActivity {
                                                                         startActivity(intent);
                                                                     });
 
+                                                                    btnFavorite.setOnClickListener(v -> {
+                                                                        
+                                                                        prefs.setVehicleType(selectedType);
+                                                                        prefs.setBrandName(brandName);
+                                                                        prefs.setModelName(modelName);
+
+                                                                        
+                                                                        String vhType = prefs.getVehicleType(); 
+                                                                        String brand = prefs.getBrandName();
+                                                                        String model = prefs.getModelName();
+
+                                                                        Log.d("PREFS_TYPE_NAME", vhType);
+                                                                        Log.d("PREFS_BRAND_NAME", brand);
+                                                                        Log.d("PREFS_MODEL_NAME", model);
+
+                                                                        
+                                                                        prefs.addVehicle(new Cars(vhType, brand, model));
+
+                                                                        Toast.makeText(MainActivity.this, "Veículo favoritado!", Toast.LENGTH_SHORT).show();
+                                                                    });
+
+
+                                                                    btnShowFavs.setOnClickListener(v -> {
+                                                                        List<Cars> carsfavs = prefs.getSavedVehicles();
+
+                                                                        Intent intent = new Intent(MainActivity.this, FavoriteActivity.class);
+                                                                        intent.putExtra("cars_favs", (Serializable) carsfavs); // envia a lista de favoritados
+                                                                        startActivity(intent);
+
+                                                                    });
+
                                                                 }
                                                             }
 
                                                             @Override
                                                             public void onFailure(Call<List<Years>> call, Throwable t) {
-                                                                Log.e("API_JSON_YEARS", "Resposta não foi bem-sucedida");
+                                                                //Log.e("API_JSON_YEARS", "Resposta não foi bem-sucedida");
                                                             }
                                                         });
 

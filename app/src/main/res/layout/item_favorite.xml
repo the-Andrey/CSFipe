@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="16dp"
+    android:padding="16dp"
+    android:radius="12dp"
+    app:cardCornerRadius="10dp"
+    app:contentPaddingBottom="10dp"
+    app:contentPaddingLeft="10dp"
+    app:contentPaddingRight="10dp"
+    app:contentPaddingTop="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Texto do veículo -->
+
+        <TextView
+            android:id="@+id/tvCarInfo"
+            android:layout_width="match_parent"
+            android:layout_height="102dp"
+            android:paddingBottom="8dp"
+            android:text="Tipo - Marca - Modelo"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnRemove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#052b7c"
+            android:text="Remover" />
+
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
